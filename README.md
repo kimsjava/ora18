@@ -113,5 +113,32 @@ CREATE TABLE IF NOT EXISTS BOARDS (
     updated_at TIMESTAMP,
     PRIMARY KEY (id)
 );
+```
 
+### Oracle 11g 추가
 
+#### 11. Docker 컨테이너 추가
+Oracle 11g XE를 Docker 컨테이너로 추가하기 위해 아래 명령어를 실행합니다.
+
+```bash
+# Oracle 11g XE 이미지 다운로드
+docker pull oracleinanutshell/oracle-xe-11g
+
+# Oracle 11g XE 컨테이너 실행 (컨테이너 이름: oracle-xe-11g)
+docker run -d --name oracle-xe-11g \
+  -p 1521:1521 -p 8080:8080 \
+  -e ORACLE_PASSWORD=oracle \
+  oracleinanutshell/oracle-xe-11g
+```
+
+# Oracle 리스너 서비스 확인
+```
+docker exec -it oracle-xe-11g bash -c "lsnrctl services"
+```
+
+# Oracle 리스너 서비스 확인 (위 명령어가 안될경우: docker conatainer내에서 path설정이 안되어있는 경우)
+```
+docker exec -it oracle-xe-11g bash"
+->
+sqlplus>lsnrctl services
+```

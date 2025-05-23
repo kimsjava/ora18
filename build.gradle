@@ -30,7 +30,8 @@ dependencies {
     
     // H2 Database
     runtimeOnly 'com.h2database:h2'
-        // Oracle JDBC 드라이버 추가
+    
+    // Oracle 11g JDBC 드라이버 (11g에 맞는 버전)
     runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
     
     // DevTools
