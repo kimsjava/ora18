@@ -74,7 +74,33 @@ Thymeleaf Template 사용
 예시: boards.html, board_detail.html 등
 템플릿을 통해 서버 사이드 렌더링 방식의 뷰를 제공합니다.
 
-## H2 데이터베이스 초기화 (수동 실행)
+## 8. Oracle XE 21c Express Edition Docker 실행 (Colima 사용)
+Colima 환경에서 Oracle XE 컨테이너를 생성 및 실행하고 SQL 접속하는 방법은 다음과 같습니다.
+
+### Colima 시작 (docker context를 colima로 설정)
+먼저, Colima를 시작합니다. (Mac 사용의 경우 ARM 환경이라면 --arch 옵션은 생략할 수 있습니다.)
+
+```bash 
+colima start --memory 4
+```
+
+```bash 
+docker context use colima
+```
+
+```bash or zsh
+docker exec -it oracle-xe sqlplus system/oracle@//localhost:1521/XEPDB1
+```
+
+### Docker 시작
+```
+docker run -d --name oracle-xe \
+  -p 1521:1521 -p 5500:5500 \
+  -e ORACLE_PASSWORD=oracle \
+  gvenzl/oracle-xe:21.3.0
+```
+
+## 9. H2 데이터베이스 초기화 (수동 실행)
 
 만약 H2 데이터베이스 스크립트가 자동으로 실행되지 않는 경우, 아래의 DDL 문을 [H2 Console](http://localhost:8080/h2-console) 에서 직접 실행하여 테이블을 생성할 수 있습니다.
 
@@ -87,4 +113,5 @@ CREATE TABLE IF NOT EXISTS BOARDS (
     updated_at TIMESTAMP,
     PRIMARY KEY (id)
 );
+
 
